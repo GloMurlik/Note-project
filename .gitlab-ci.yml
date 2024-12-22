@@ -6,7 +6,7 @@ stages:
   - deploy
 
 variables:
-  DATABASE_URL: "sqlite:///./app.db"  # Укажите свою базу данных, если нужно
+  DATABASE_URL: "sqlite:///./app.db"
 
 cache:
   paths:
