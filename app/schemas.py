@@ -5,10 +5,10 @@ class NoteBase(BaseModel):
     title: str
     content: str
 
-class NoteCreate(NoteBase):  # Наследуем NoteBase
+class NoteCreate(NoteBase):
     pass
 
-class NoteUpdate(NoteBase):  # Наследуем NoteBase
+class NoteUpdate(NoteBase):
     pass
 
 class NoteInDB(NoteBase):
@@ -18,6 +18,6 @@ class NoteInDB(NoteBase):
     class Config:
         orm_mode = True
 
-class Note(NoteInDB):  # Наследуем NoteInDB
+class Note(NoteInDB):
     pass
 

@@ -9,9 +9,9 @@ router = APIRouter()
 
 @router.get("/{note_id}", response_model=schemas.Note, summary="Получить заметку по id", description=":)")
 def get_note(note_id: int, db: Session = Depends(database.get_db)):
-    db_note = db.query(models.Note).filter(models.Note.id == note_id).first()  # Поиск по ID
+    db_note = db.query(models.Note).filter(models.Note.id == note_id).first()
     if db_note is None:
-        raise HTTPException(status_code=404, detail="Заметка не найдена")  # Ошибка, если не найдено
+        raise HTTPException(status_code=404, detail="Заметка не найдена")
     return db_note
 
 @router.post("/notes", summary="Создание заметки", description="Просто создать заметку")

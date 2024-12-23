@@ -20,7 +20,7 @@ def update_note(note_id: int, updated_note: schemas.NoteCreate, db: Session = De
 
     db_note.title = updated_note.title
     db_note.content = updated_note.content
-    db_note.created_at = updated_note.created_at  # если есть поле created_at, если его обновлять нужно
+    db_note.created_at = updated_note.created_at 
 
     db.commit()
     db.refresh(db_note)
@@ -34,5 +34,5 @@ def delete_note(note_id: int, db: Session = Depends(database.get_db)):
 
     db.delete(db_note)
     db.commit()
-    return {"message": "Заметка успешно удалена"}
+    return {"сообщение": "Заметка успешно удалена"}
 
