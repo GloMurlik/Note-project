@@ -5,8 +5,7 @@ services:
       - "8000:8000"
     volumes:
       - .:/app
-    depends_on:
-      - db
+
   prometheus:
     image: prom/prometheus:v2.47.0
     volumes:
@@ -15,20 +14,7 @@ services:
       - "9090:9090"
     networks:
       - monitoring
-    deploy:
-      resources:
-        limits:
-          memory: 512M
-        reservations:
-          memory: 256M
-  db:
-    image: postgres:15
-    environment:
-      POSTGRES_USER: user
-      POSTGRES_PASSWORD: password
-      POSTGRES_DB: notes
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
+
   grafana:
     image: grafana/grafana-enterprise
     platform: linux/amd64
@@ -41,10 +27,21 @@ services:
       - GF_SECURITY_ADMIN_PASSWORD=admin
       - GF_SECURITY_ADMIN_USER=admin
     restart: unless-stopped
-
+  jenkins:
+    image: jenkins/jenkins:lts
+    container_name: jenkins
+    ports:
+      - "8080:8080"
+      - "50000:50000"
+    volumes:
+      - jenkins_home:/var/jenkins_home
+    networks:
+      - jenkins-network
 networks:
   monitoring:
     driver: bridge
+  jenkins-network:
+    driver: bridge
 
 volumes:
-  postgres_data:
+  jenkins_home:
